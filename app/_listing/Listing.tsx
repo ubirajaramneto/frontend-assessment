@@ -1,4 +1,4 @@
-import { ListingType } from "@/app/lib/listings/data";
+import { ListingType } from "@/app/lib/listing/data";
 import { ListingCard } from "./ListingCard";
 
 interface ListingsProps {

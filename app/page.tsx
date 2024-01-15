@@ -1,5 +1,5 @@
-import { Listing } from "@/app/_listings/Listing";
-import { ListingType, ListingData } from "@/app/lib/listings/data";
+import { Listing } from "@/app/_listing/Listing";
+import { ListingType, ListingData } from "@/app/lib/listing/data";
 
 export default async function Home() {
   const listing: Array<ListingType> = await ListingData();

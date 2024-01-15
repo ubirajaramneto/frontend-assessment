@@ -1,4 +1,4 @@
-import { ListingType } from "@/app/lib/listings/data";
+import { ListingType } from "@/app/lib/listing/data";
 import { bedsBathroomsFormatter } from "@/app/lib/formaters/beds-bathrooms-formatter";
 import Link from "next/link";
 import { SalePriceFormatter } from "@/app/lib/formaters/sale-price-formatter";
