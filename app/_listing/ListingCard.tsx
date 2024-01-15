@@ -1,33 +1,31 @@
 import { ListingType } from "@/app/lib/listing/data";
 import { bedsBathroomsFormatter } from "@/app/lib/formaters/beds-bathrooms-formatter";
-import Link from "next/link";
-import { SalePriceFormatter } from "@/app/lib/formaters/sale-price-formatter";
+import { ListingTitle } from "@/app/_listing/ListingTitle";
+import { ListingSalePrice } from "@/app/_listing/ListingPrice";
+import LinkButton from "@/app/_components/buttons/LinkButton";
+import ListingLocation from "@/app/_listing/ListingLocation";
 
 interface ListingCardProps {
   listing: ListingType;
 }
 
 export function ListingCard({ listing }: ListingCardProps) {
+  // TODO: refactor the layout and html structure to make the layout more fluid in the data section
   return (
-    <div className="border border-gray-600 w-[300px] flex flex-col">
+    <div className="border border-gray-600 w-full flex flex-col">
       <img src={listing.PictureURL} alt="listing-picture" />
       <div className="p-4">
-        <p className="text-lg font-bold line-clamp-2 min-h-16">
-          {listing.Title}
-        </p>
-        <p className="text-gray-700">{listing.Location}</p>
+        <div className="min-h-16">
+          <ListingTitle title={listing.Title} size="small" />
+        </div>
+        <ListingLocation location={listing.Location} />
         <p className="text-gray-500 mb-4">
           {bedsBathroomsFormatter(listing.Bedrooms, listing.Bathrooms)}
         </p>
-        <p className="text-2xl font-bold">
-          {SalePriceFormatter(listing["Sale Price"])}
-        </p>
-        <Link
-          href={`listings/${listing.Id}`}
-          className="rounded bg-blue-500 text-white p-4 block w-3/4 text-center mt-4"
-        >
-          View Details
-        </Link>
+        <div className="my-4">
+          <ListingSalePrice price={listing["Sale Price"]} />
+        </div>
+        <LinkButton href={`listings/${listing.Id}`} label="View Details" />
       </div>
     </div>
   );
