@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 export interface ListingType {
   Id: number;
   DateListed: string;
@@ -20,4 +22,13 @@ const LISTING_URL =
 export async function ListingData(): Promise<Array<ListingType>> {
   const response = await fetch(LISTING_URL);
   return await response.json();
+}
+
+export async function GetListing(id: string): Promise<ListingType | undefined> {
+  const listings = await ListingData();
+  const listing = listings.find((listing) => listing.Id === Number(id));
+  if (!listing) {
+    return notFound();
+  }
+  return listing;
 }
