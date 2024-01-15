@@ -19,9 +19,38 @@ export interface ListingType {
 const LISTING_URL =
   "https://s3.us-west-2.amazonaws.com/cdn.number8.com/LA/listings.json";
 
-export async function ListingData(): Promise<Array<ListingType>> {
+export interface ListingSearchParams {
+  bedrooms?: string;
+  bathrooms?: string;
+  parking?: string;
+  price?: string;
+}
+
+export async function ListingData(
+  searchParams: ListingSearchParams | undefined,
+): Promise<Array<ListingType>> {
   const response = await fetch(LISTING_URL);
-  return await response.json();
+  const data = await response.json();
+
+  return data.filter((listing: ListingType) => {
+    let isValid = true;
+
+    if (searchParams?.bedrooms !== undefined) {
+      isValid = isValid && listing.Bedrooms >= Number(searchParams?.bedrooms);
+    }
+    if (searchParams?.bathrooms !== undefined) {
+      isValid = isValid && listing.Bathrooms >= Number(searchParams?.bathrooms);
+    }
+    if (searchParams?.parking !== undefined) {
+      isValid = isValid && listing.Parking >= Number(searchParams?.parking);
+    }
+    if (searchParams?.price !== undefined) {
+      const price = Number(searchParams?.price);
+      isValid = isValid && listing["Sale Price"] <= price;
+    }
+
+    return isValid;
+  });
 }
 
 export async function GetListing(id: string): Promise<ListingType | undefined> {
