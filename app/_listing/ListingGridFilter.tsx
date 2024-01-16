@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 
 export default function ListingGridFilter() {
   const searchParams = useSearchParams();
@@ -17,42 +17,19 @@ export default function ListingGridFilter() {
     };
   }
 
-  const handleBedroomsChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
     const params = new URLSearchParams(searchParams);
-    if (Number(event.target.value) === 0) {
-      params.delete("bedrooms");
+    const value = Number(event.target.value);
+    const name = event.target.name;
+
+    if (value === 0) {
+      params.delete(name);
     } else {
-      params.set("bedrooms", event.target.value);
+      params.set(name, event.target.value);
     }
+
     replace(`${pathName}?${params.toString()}`);
-  };
-  const handleBathroomsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const params = new URLSearchParams(searchParams);
-    if (Number(event.target.value) === 0) {
-      params.delete("bathrooms");
-    } else {
-      params.set("bathrooms", event.target.value);
-    }
-    replace(`${pathName}?${params.toString()}`);
-  };
-  const handleParkingChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const params = new URLSearchParams(searchParams);
-    if (Number(event.target.value) === 0) {
-      params.delete("parking");
-    } else {
-      params.set("parking", event.target.value);
-    }
-    replace(`${pathName}?${params.toString()}`);
-  };
-  const handlePriceChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
-    const params = new URLSearchParams(searchParams);
-    if (Number(event.target.value) === 0) {
-      params.delete("price");
-    } else {
-      params.set("price", event.target.value);
-    }
-    replace(`${pathName}?${params.toString()}`);
-  }, 300); // 300ms delay
+  }, 300);
 
   return (
     <div className="flex justify-between w-full max-w-[1283px] my-8">
@@ -63,7 +40,7 @@ export default function ListingGridFilter() {
           name="bedrooms"
           id="bedrooms"
           min="0"
-          onChange={handleBedroomsChange}
+          onChange={handleInputChange}
           defaultValue={searchParams.get("bedrooms") ?? 0}
           className="border border-gray-600 rounded p-2"
         />
@@ -75,7 +52,7 @@ export default function ListingGridFilter() {
           name="bathrooms"
           id="bathrooms"
           min="0"
-          onChange={handleBathroomsChange}
+          onChange={handleInputChange}
           defaultValue={searchParams.get("bathrooms") ?? 0}
           className="border border-gray-600 rounded p-2"
         />
@@ -87,7 +64,7 @@ export default function ListingGridFilter() {
           name="parking"
           id="parking"
           min="0"
-          onChange={handleParkingChange}
+          onChange={handleInputChange}
           defaultValue={searchParams.get("parking") ?? 0}
           className="border border-gray-600 rounded p-2"
         />
@@ -104,7 +81,7 @@ export default function ListingGridFilter() {
             max="1000000"
             id="price"
             step="10000"
-            onChange={handlePriceChange}
+            onChange={handleInputChange}
             defaultValue={searchParams.get("price") ?? 0}
             className="border border-gray-600 rounded p-2"
           />

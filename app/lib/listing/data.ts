@@ -26,30 +26,39 @@ export interface ListingSearchParams {
   price?: string;
 }
 
+const meetsBedroomsCondition = (
+  listing: ListingType,
+  bedrooms: string | undefined,
+) => bedrooms === undefined || listing.Bedrooms >= Number(bedrooms);
+
+const meetsBathroomsCondition = (
+  listing: ListingType,
+  bathrooms: string | undefined,
+) => bathrooms === undefined || listing.Bathrooms >= Number(bathrooms);
+
+const meetsParkingCondition = (
+  listing: ListingType,
+  parking: string | undefined,
+) => parking === undefined || listing.Parking >= Number(parking);
+
+const meetsPriceCondition = (listing: ListingType, price: string | undefined) =>
+  price === undefined || listing["Sale Price"] <= Number(price);
+
 export async function ListingData(
-  searchParams: ListingSearchParams | undefined,
+  searchParams?: ListingSearchParams,
 ): Promise<Array<ListingType>> {
   const response = await fetch(LISTING_URL);
   const data = await response.json();
 
   return data.filter((listing: ListingType) => {
-    let isValid = true;
+    const checks = [
+      () => meetsBedroomsCondition(listing, searchParams?.bedrooms),
+      () => meetsBathroomsCondition(listing, searchParams?.bathrooms),
+      () => meetsParkingCondition(listing, searchParams?.parking),
+      () => meetsPriceCondition(listing, searchParams?.price),
+    ];
 
-    if (searchParams?.bedrooms !== undefined) {
-      isValid = isValid && listing.Bedrooms >= Number(searchParams?.bedrooms);
-    }
-    if (searchParams?.bathrooms !== undefined) {
-      isValid = isValid && listing.Bathrooms >= Number(searchParams?.bathrooms);
-    }
-    if (searchParams?.parking !== undefined) {
-      isValid = isValid && listing.Parking >= Number(searchParams?.parking);
-    }
-    if (searchParams?.price !== undefined) {
-      const price = Number(searchParams?.price);
-      isValid = isValid && listing["Sale Price"] <= price;
-    }
-
-    return isValid;
+    return checks.every((check) => check());
   });
 }
 
