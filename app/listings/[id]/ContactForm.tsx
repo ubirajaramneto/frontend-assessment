@@ -82,7 +82,7 @@ const ContactForm = () => {
           <label>Email:</label>
           <input
             className="border border-gray-500 my-4"
-            type="email"
+            type="text"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -108,11 +108,7 @@ const ContactForm = () => {
             cols={23}
           ></textarea>
         </div>
-        <DefaultButton
-          type="submit"
-          label="Contact Now"
-          onClickHandler={() => console.log("contacted")}
-        />
+        <DefaultButton type="submit" label="Contact Now" />
         <div style={{ color: isValid ? "green" : "red" }}>{message}</div>
       </form>
     </div>
