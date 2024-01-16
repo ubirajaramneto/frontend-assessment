@@ -5,7 +5,7 @@ export default function DefaultButton({
   label,
   type = "button",
 }: {
-  onClickHandler: () => void;
+  onClickHandler?: () => void;
   label: string;
   type?: "button" | "submit" | "reset" | undefined;
 }) {
