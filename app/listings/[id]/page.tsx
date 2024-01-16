@@ -4,6 +4,7 @@ import { ListingSalePrice } from "@/app/_listing/ListingPrice";
 import FavoriteListingButton from "@/app/listings/[id]/FavoriteListingButton";
 import { ListingDate } from "@/app/_listing/ListingDate";
 import ListingLocation from "@/app/_listing/ListingLocation";
+import ContactForm from "@/app/listings/[id]/ContactForm";
 
 export default async function ListingDetailsPage({
   params,
@@ -68,7 +69,7 @@ export default async function ListingDetailsPage({
             <div className="h-24 my-4">
               <FavoriteListingButton id={listing.Id} />
             </div>
-            <div className="border border-gray-500 w-full h-96"></div>
+            <ContactForm />
           </div>
         </div>
       </div>
