@@ -10,7 +10,6 @@ interface ListingCardProps {
 }
 
 export function ListingCard({ listing }: ListingCardProps) {
-  // TODO: refactor the layout and html structure to make the layout more fluid in the data section
   return (
     <div className="border border-gray-600 w-full flex flex-col">
       <img src={listing.PictureURL} alt="listing-picture" />

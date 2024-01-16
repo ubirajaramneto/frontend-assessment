@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import DefaultButton from "@/app/_components/buttons/DefaultButton";
-import SavedPropertiesModal from "@/app/listings/[id]/SavedPropertiesModal";
+import SavedPropertiesModal from "@/app/_listing/SavedPropertiesModal";
 
 interface FavoriteListingButtonProps {
   id: number;

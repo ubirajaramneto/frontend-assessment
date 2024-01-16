@@ -1,11 +1,11 @@
 import { GetListing } from "@/app/lib/listing/data";
 import { ListingTitle } from "@/app/_listing/ListingTitle";
 import { ListingSalePrice } from "@/app/_listing/ListingPrice";
-import FavoriteListingButton from "@/app/listings/[id]/FavoriteListingButton";
 import { ListingDate } from "@/app/_listing/ListingDate";
 import ListingLocation from "@/app/_listing/ListingLocation";
-import ContactForm from "@/app/listings/[id]/ContactForm";
 import ListingFactsCard from "@/app/_listing/ListingFactsCard";
+import FavoriteListingButton from "@/app/_listing/FavoriteListingButton";
+import ContactForm from "@/app/_listing/ContactForm";
 
 export default async function ListingDetailsPage({
   params,

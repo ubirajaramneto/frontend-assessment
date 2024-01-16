@@ -1,4 +1,3 @@
-import Link from "next/link";
 import LinkButton from "@/app/_components/buttons/LinkButton";
 
 export default function ListingNotFound() {
