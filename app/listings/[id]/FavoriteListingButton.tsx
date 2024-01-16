@@ -21,7 +21,10 @@ export default function FavoriteListingButton({
   }, []);
 
   const saveProperty = () => {
-    if (savedProperties.includes(id)) return;
+    if (savedProperties.includes(id)) {
+      setModalOpen(true);
+      return;
+    }
     const updatedSavedProperties = [...savedProperties, id];
     setSavedProperties(updatedSavedProperties);
     localStorage.setItem(
