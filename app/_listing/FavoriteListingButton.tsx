@@ -8,6 +8,11 @@ interface FavoriteListingButtonProps {
   id: number;
 }
 
+// NOTE TO REVIEWER:
+// The logic for displaying the modal is in the FavoriteListingButton component in order
+// to avoid creating a context or any other means of sharing state between components.
+// Simplicity was favored over the "correct" way of doing this.
+
 export default function FavoriteListingButton({
   id,
 }: FavoriteListingButtonProps) {
