@@ -15,7 +15,7 @@ export default async function Home({
   const price = searchParams?.price ?? "0";
 
   return (
-    <main className="flex -h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <ListingGridFilter />
       <Suspense
         key={beds + baths + park + price}
