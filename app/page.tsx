@@ -1,6 +1,6 @@
+import { Suspense } from "react";
 import { ListingGrid } from "@/app/_listing/ListingGrid";
 import ListingGridFilter from "@/app/_listing/ListingGridFilter";
-import { Suspense } from "react";
 import { ListingSearchParams } from "@/app/lib/listing/data";
 import ListingGridSkeleton from "@/app/_listing/ListingGridSkeleton";
 

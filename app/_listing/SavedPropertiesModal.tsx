@@ -1,6 +1,8 @@
 "use client";
 
 import DefaultButton from "@/app/_components/buttons/DefaultButton";
+import Link from "next/link";
+import LinkButton from "@/app/_components/buttons/LinkButton";
 
 interface SavedPropertiesModalProps {
   savedProperties: Array<number>;
@@ -21,7 +23,13 @@ export default function SavedPropertiesModal({
         <div className="bg-gray-200 p-12 rounded-lg w-1/3">
           <ul className="mb-4">
             {savedProperties.map((propertyId) => (
-              <li key={propertyId}>Property ID: {propertyId}</li>
+              <li key={propertyId}>
+                Property ID:{" "}
+                <LinkButton
+                  href={`${propertyId}`}
+                  label={propertyId.toString()}
+                />
+              </li>
             ))}
           </ul>
           <DefaultButton onClickHandler={onClose} label="Close"></DefaultButton>
